@@ -11,7 +11,7 @@ on:
 
 env:
   PLATFORM: linux/amd64
-  EVENT_NUMBER: ${{ github.event.number || github.sha }}
+  EVENT_NUMBER: ${{ github.sha }}
 
 jobs:
   build:
@@ -40,7 +40,7 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         with:
-          args: set image deployment/hello-world hello-world=pepsicolav13/hello-world:${{ env.EVENT_NUMBER }} 
+          args: set image deployment/hello-world hello-world=pepsicolav13/hello-world:${{ env.EVENT_NUMBER }}
 
       #- name: Envsubst K8s Manifest
       #  if: github.event_name == 'pull_request'
