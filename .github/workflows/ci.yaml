@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 env:
   PLATFORM: linux/amd64
@@ -33,14 +33,14 @@ jobs:
         with:
           context: .
           push: true
-          tags: hello-world:${{ env.EVENT_NUMBER }}
+          tags: pepsicolav13/hello-world:${{ env.EVENT_NUMBER }}
 
       - name: kubectl
         uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         with:
-          args: set image deployment/hello-world hello-world=hello-world:${{ env.EVENT_NUMBER }} 
+          args: set image deployment/hello-world hello-world=pepsicolav13/hello-world:${{ env.EVENT_NUMBER }} 
 
       #- name: Envsubst K8s Manifest
       #  if: github.event_name == 'pull_request'
